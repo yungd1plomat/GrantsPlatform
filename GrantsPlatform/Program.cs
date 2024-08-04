@@ -23,7 +23,7 @@ namespace GrantsPlatform
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Читаем конфиг
+            // Р§РёС‚Р°РµРј РєРѕРЅС„РёРі
             var connectionString = builder.Configuration["POSTGRES_CONNECTION"] ?? throw new InvalidOperationException("Connection string not found.");
             var issuer = builder.Configuration["ISSUER"] ?? throw new InvalidOperationException("Issuer not found.");
             var secretKey = builder.Configuration["SECRET_KEY"] ?? throw new InvalidOperationException("Secret key not found.");
@@ -49,7 +49,7 @@ namespace GrantsPlatform
                 };
             });
 
-            // Чтобы маппить IEnumerable<int> в jsonb используем EnableDynamicJson
+            // Р§С‚РѕР±С‹ РјР°РїРїРёС‚СЊ IEnumerable<int> РІ jsonb РёСЃРїРѕР»СЊР·СѓРµРј EnableDynamicJson
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(new NpgsqlDataSourceBuilder(connectionString)
                                     .EnableDynamicJson()
@@ -79,8 +79,8 @@ namespace GrantsPlatform
 
             var app = builder.Build();
 
-            // Автоматически добавляет тестовые данные из файла testData.json
-            // Раскомментировать, если понадобится
+            // РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё РґРѕР±Р°РІР»СЏРµС‚ С‚РµСЃС‚РѕРІС‹Рµ РґР°РЅРЅС‹Рµ РёР· С„Р°Р№Р»Р° testData.json
+            // Р Р°СЃРєРѕРјРјРµРЅС‚РёСЂРѕРІР°С‚СЊ, РµСЃР»Рё РїРѕРЅР°РґРѕР±РёС‚СЃСЏ
             /*
             using (var scope = app.Services.CreateScope())
             {
@@ -127,7 +127,7 @@ namespace GrantsPlatform
                 app.UseHsts();
             }
 
-            // Кидаем ErrorResponse при ошибке авторизации
+            // РљРёРґР°РµРј ErrorResponse РїСЂРё РѕС€РёР±РєРµ Р°РІС‚РѕСЂРёР·Р°С†РёРё
             app.UseMiddleware<CustomUnauthorizedMiddleware>();
 
             app.UseHttpsRedirection();
